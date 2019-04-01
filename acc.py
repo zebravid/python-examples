@@ -14,12 +14,21 @@ class Acco:
 		with open(self.filepath,'w') as file:
 			file.write(str(self.balance))
 class Checking(Acco):
-	def __init__(self,filepath):
+	"""Example of inheritance
+	and class variable and doc string"""
+	type="checking"
+	def __init__(self,filepath,fee):
 		Acco.__init__(self,filepath)
+		self.fee=fee
+	
+	def transfer(self,amount):
+		self.balance=self.balance-amount- self.fee
+		self.commit()
 		
 		
-chec=Checking("bal.txt")
+chec=Checking("bal.txt",1)
 
 print(chec.balance)
 chec.withdrow(100)
+chec.transfer(15)
 print(chec.balance)
