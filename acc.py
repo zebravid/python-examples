@@ -8,4 +8,7 @@ class Acco:
 	def deposit(self,amount):
 		self.balance=self.balance+amount
 account=Acco("bal.txt")
+
+print(account.balance)
+account.withdrow(100)
 print(account.balance)
