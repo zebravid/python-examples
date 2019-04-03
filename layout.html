@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+<header>
+<div class="container">
+<h1 class="logo"> Big Logo</h1>
+<strong><nav>
+<ul class="menu">
+<li><a href="{{url_for('home')}}"> Home</a></li>
+<li><a href="{{url_for('about')}}"> About</a></li>
+</ul>
+</strong></nav>
+</div>
+</header>
+<div class="container"
+{%block content%}
+{%endblock%}
+</div>
+<p>
+this is test page
+</p>
+</body>
+</html>
