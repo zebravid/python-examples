@@ -1,5 +1,6 @@
+#pylint:disable=E0001
 import sys
-import forms
+import forml
 from backOp import Book
 import os
 from PyQt5 import QtWidgets
@@ -7,7 +8,7 @@ from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget, QLabel
 from PyQt5 import uic
 
-class ExampleApp(QtWidgets.QMainWindow, forms.Ui_Form):
+class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     def __init__(self,db):
         # Это здесь нужно для доступа к переменным, методам
         # и т.д. в файле design.py
@@ -16,26 +17,35 @@ class ExampleApp(QtWidgets.QMainWindow, forms.Ui_Form):
         self.db=db
         for element in self.db.view():
         	for input in element:
-        		self.textEdit.append(str(input))
+        		self.listView.addItem(str(input))
         self.pushButton.clicked.connect(self.browseFun)
+        self.pushButton_2.clicked.connect(self.addTextodb)
+        self.listView.addItem(str("uĝgggggggt"))
     def browseFun(self):
     	
-    	self.textEdit.clear()
-    	self.textEdit.append("77777")
+    	#self.listVew.clear()
+    	self.listView.addItem("77777")
     	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "Выберите папку")
     	
     	if derectory:
     		
         	for filename in os.listdir(derectory):
-        		self.textEdit.append(filename)
+        		self.listView.addItem(filename)
         		#adding items to the db
         		self.db.insert(filename,"","","")
-        	
+    def addTextodb(self):
+    	
+    	textVal=self.lineEdit.text()+"*****"
+    	#myItem=QtWidgets.QListWidgetItem("&&&&&&")
+    	self.db.insert(textVal,"","","")
+    	self.listView.addItem(textVal)
+      	
+        		
         		
    	
 
 if __name__ == '__main__':
-	bookDb=Book("book.db")
+	bookDb=Book("bookek.db")
 	app = QApplication(sys.argv)
 	ex = ExampleApp(bookDb)
 	ex.show()
