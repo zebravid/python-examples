@@ -1,5 +1,6 @@
 #pylint:disable=E0001
 import sys
+import sip
 import forml
 from backOp import Book
 import os
@@ -10,9 +11,7 @@ from PyQt5 import uic
 
 class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     def __init__(self,db):
-        # Это здесь нужно для доступа к переменным, методам
-        # и т.д. в файле design.py
-        super().__init__()
+        super(ExampleApp,self).__init__()
         self.setupUi(self)
         self.db=db
         for element in self.db.view():
@@ -24,7 +23,7 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         self.pushButton.clicked.connect(self.browseFun)
         self.pushButton_2.clicked.connect(self.addTextodb)
         
-        self.listView.addItem(str("uĝgggggggt"))
+        self.listView.addItem(str("ugggggggt"))
     #adds text from selected item in listWidget
     def itemAct(self):
     	myi=self.listView.currentItem()
@@ -35,7 +34,7 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     	
     	#self.listVew.clear()
     	self.listView.addItem("77777")
-    	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "Выберите папку")
+    	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
     	
     	if derectory:
     		
