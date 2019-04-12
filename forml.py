@@ -13,9 +13,9 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 300)
-        self.textEdit = QtWidgets.QTextEdit(Form)
-        self.textEdit.setGeometry(QtCore.QRect(253, 20, 141, 271))
-        self.textEdit.setObjectName("textEdit")
+        self.listView=QtWidgets.QListWidget(Form)
+        self.listView.setGeometry(QtCore.QRect(253, 20, 141, 271))
+        self.listView.setObjectName("textEdit")
         self.lineEdit = QtWidgets.QLineEdit(Form)
         self.lineEdit.setGeometry(QtCore.QRect(130, 20, 113, 20))
         self.lineEdit.setObjectName("lineEdit")
