@@ -18,9 +18,19 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         for element in self.db.view():
         	for input in element:
         		self.listView.addItem(str(input))
+        #connection for buttons and user interactions
+        #sends text in selected item to show in lineEdit_4
+        self.listView.itemSelectionChanged.connect(self.itemAct)
         self.pushButton.clicked.connect(self.browseFun)
         self.pushButton_2.clicked.connect(self.addTextodb)
+        
         self.listView.addItem(str("uĝgggggggt"))
+    #adds text from selected item in listWidget
+    def itemAct(self):
+    	myi=self.listView.currentItem()
+    	self.lineEdit_4.setText(myi.text())
+    	#pass
+    	
     def browseFun(self):
     	
     	#self.listVew.clear()
