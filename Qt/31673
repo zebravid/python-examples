@@ -1,0 +1,67 @@
+#pylint:disable=E0001
+import sys
+#import sip
+import forml
+from backOp import Book
+import os
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5 import uic
+
+class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
+    def __init__(self,db):
+        super(ExampleApp,self).__init__()
+        self.setupUi(self)
+        self.db=db
+        self.table.setSelectionBehavior(QtWidgets.QTableView.SelectRows)
+        self.table.setRowCount(0)
+        result=self.db.view()
+        for row_n,row_d in enumerate(result):
+        	self.table.insertRow(row_n)
+        	for col_n,input in enumerate(row_d):
+        		self.table.setItem(row_n,col_n,QtWidgets.QTableWidgetItem(input))
+        #connection for buttons and user interactions
+        #sends text in selected item to show in lineEdit_4
+        
+        self.table.clicked.connect(self.itemAct)
+        #self.pushButton.clicked.connect(self.browseFun)
+        self.pushButton_2.clicked.connect(self.addTextodb)
+        mylist=["&&&",str(12),str(27.8),"john baiden"]
+        #self.table.addItems(mylist)
+    #adds text from selected item in listWidget
+    def itemAct(self):
+    	r=self.table.currentRow()
+    	myi=self.table.item(r,1).text()
+    	self.lineEdit_4.setText(myi)
+    	#pass
+    	
+    def browseFun(self):
+    	
+    	#self.listVew.clear()
+    	self.table.addItem("77777")
+    	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
+    	
+    	if derectory:
+    		
+        	for filename in os.listdir(derectory):
+        		self.table.addItem(filename)
+        		#adding items to the db
+        		self.db.insert(filename,"","","")
+    def addTextodb(self):
+    	
+    	textVal=self.lineEdit.text()+"*****"
+    	#myItem=QtWidgets.QListWidgetItem("&&&&&&")
+    	self.db.insert(textVal,"","","")
+    	self.table.addItem(textVal)
+      	
+        		
+        		
+   	
+
+if __name__ == '__main__':
+	bookDb=Book("book.db")
+	app = QApplication(sys.argv)
+	ex = ExampleApp(bookDb)
+	ex.show()
+	sys.exit(app.exec_())
