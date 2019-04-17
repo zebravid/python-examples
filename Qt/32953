@@ -35,7 +35,7 @@ class Book():
 		self.conn.close()
 	
 		
-bookDb=Book("book.db")
+bookDb=Book("bo.db")
 result=bookDb.view()
 for row_n,row_d in enumerate(result):
 	for col_n,input in enumerate(row_d):
