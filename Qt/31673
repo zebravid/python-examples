@@ -25,21 +25,25 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         self.table.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         
         self.table.setRowCount(0)
+        #call to backOp function to list all rows
         result=self.db.view()
+        #fill the whole tabnle
         for row_n,row_d in enumerate(result):
         	self.table.insertRow(row_n)
         	for col_n,input in enumerate(row_d):
         		self.table.setItem(row_n,col_n,QtWidgets.QTableWidgetItem(str(input)))
         		
-        #connection for buttons and user interactions
-        #sends text in selected item to show in lineEdit_4
-        
+        #connection for buttons and user interaction
+        #fills edit fields with data from a row
+        #TODO update values and rewrite selected row
         self.table.clicked.connect(self.itemAct)
-        #self.pushButton.clicked.connect(self.browseFun)
+        #opens browsing window
+        self.pushButton.clicked.connect(self.browseFun)
+        #adds fields to database
         self.pushButton_2.clicked.connect(self.addTextodb)
+        #removes selected row from table and database
         self.pushButton_3.clicked.connect(self.removeTextodb)
-        
-    #removes item frtom table
+       
     
     #adds text from selected item in listWidget
     
@@ -67,10 +71,9 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     		
     	else:
     		self.lineEdit_4.setText("select the row")
-    	
+   #TODO find an useful implimentation for file browser
+   #maybe for backup and csv conversion	
     def browseFun(self):
-    	
-    	self.table.addItem("77777")
     	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
     	
     	if derectory:
@@ -78,7 +81,7 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         	for filename in os.listdir(derectory):
         		self.table.addItem(filename)
         		#adding items to the db
-        		self.db.insert(filename,"","","")
+        	#	self.db.insert(filename,"","","")
         		
     def addTextodb(self):
     	
