@@ -6,11 +6,13 @@ class Book():
 		self.cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, title text ,author text, year integer,isbn integer)")
 		self.conn.commit()
 
-	
+	#TODO max id crashes when there is no database
 	def maxId(self):
 		self.cur.execute("SELECT * FROM book WHERE   id = (SELECT max(id)  FROM book) ")	
 		rows=self.cur.fetchall()
-		return rows[0][0]
+		#return rows[0][0]
+		return 1
+
 	def insert(self,title,author,year,isbn):
 		self.cur.execute("INSERT INTO book VALUES (NULL,?,?,?,?)",(title ,author , year ,isbn ))
 		self.conn.commit()

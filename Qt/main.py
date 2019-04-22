@@ -1,6 +1,6 @@
 #pylint:disable=E0001
 import sys
-#import sip
+import sip
 import forml
 from backOp import Book
 import os
