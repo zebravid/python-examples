@@ -47,13 +47,15 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         self.pushButton_6.clicked.connect(self.updateTextodb)
     #updates selected row with new values
     def updateTextodb(self):
+    	r=self.table.currentRow()
     	textVal=self.lineEdit.text()
     	textVal1=self.lineEdit_2.text()
     	textVal2=self.lineEdit_3.text()
     	textVal3=self.lineEdit_4.text()
-    	self.db.update(int(textVal),textVal1,textVal2,textVal3,"")
-    	r=self.table.currentRow()
-    	self.addToTable(int(textVal),textVal,textVal1,textVal2,textVal3,r)
+    	textVal4=self.lineEdit_5.text()
+    	self.db.update(int(textVal),textVal1,textVal2,textVal3,textVal4)
+
+    	self.addToTable(int(textVal),textVal1,textVal2,textVal3,textVal4,r)
     	
     #adds text from selected item in listWidget
     
@@ -82,6 +84,7 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     	else:
     		self.lineEdit_4.setText("select the row")
    #TODO find an useful implimentation for file browser
+   #TODO convert to csv file
    #maybe for backup and csv conversion	
     def browseFun(self):
     	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
@@ -97,10 +100,10 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     	
     	#get the id from database using maxId()
     	
-    	textVal=self.lineEdit.text()
-    	textVal1=self.lineEdit_2.text()
-    	textVal2=self.lineEdit_3.text()
-    	textVal3=self.lineEdit_4.text()
+    	textVal=self.lineEdit_2.text()
+    	textVal1=self.lineEdit_3.text()
+    	textVal2=self.lineEdit_4.text()
+    	textVal3=self.lineEdit_5.text()
 
     	self.db.insert(textVal,textVal1,textVal2,textVal3)
     	myId=self.db.maxId()
