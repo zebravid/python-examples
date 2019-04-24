@@ -43,8 +43,11 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         self.pushButton_2.clicked.connect(self.addTextodb)
         #removes selected row from table and database
         self.pushButton_3.clicked.connect(self.removeTextodb)
+        self.pushButton_4.clicked.connect(self.convertC)
         #update selected row
         self.pushButton_6.clicked.connect(self.updateTextodb)
+    def convertC(self):
+    	self.db.csvConvert()
     #updates selected row with new values
     def updateTextodb(self):
     	r=self.table.currentRow()
