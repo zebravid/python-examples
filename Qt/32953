@@ -1,5 +1,7 @@
 import sqlite3
 import csv
+import os
+from shutil import copy
 
 class Book():
 	def __init__(self,book):
@@ -7,14 +9,27 @@ class Book():
 		self.cur=self.conn.cursor()
 		self.cur.execute("CREATE TABLE IF NOT EXISTS book (id INTEGER PRIMARY KEY, title text ,author text, year integer,isbn integer)")
 		self.conn.commit()
-	def csvConvert(self):
+	def csvConvert(self,name,backDir):
 		
 		self.cur.execute('SELECT * FROM book')
-		with open('output.csv','w') as out_csv_file:
-			  csv_out = csv.writer(out_csv_file)
-			  csv_out.writerow([d[0] for d in self.cur.description])
-			  for result in self.cur:
-  				csv_out.writerow(result)
+		filename=name+'.csv'
+		dirPath=os.path.dirname(os.path.realpath(__file__))
+		fulPath=dirPath+"/"+filename
+		#TODO write one more time to specified dir throgh bwser
+		with open(filename,'w') as out_csv_file:
+			csv_out = csv.writer(out_csv_file)
+			csv_out.writerow([d[0] for d in self.cur.description])
+			for result in self.cur:
+			  	csv_out.writerow(result)
+		backN="backup.csv"
+		filename=backDir+"/"+backN
+		self.cur.execute('SELECT * FROM book')		
+		with open(filename,'w') as out_csv_file:
+			csv_out = csv.writer(out_csv_file)
+			csv_out.writerow([d[0] for d in self.cur.description])
+			for result in self.cur:
+			  	csv_out.writerow(result)
+		return [fulPath,dirPath,filename]
 
 	
 	def maxId(self):
@@ -59,5 +74,7 @@ for row_n,row_d in enumerate(result):
         	print(str(input)+"&"+str(row_n)+"%"+str(col_n))
         	'''
 print(bookDb.maxId())
-bookDb.csvConvert()
+#path=bookDb.csvConvert("conversion")
+##copy(path[0],"test.csv")
+print(os.path.dirname(os.path.realpath(__file__)))
         	

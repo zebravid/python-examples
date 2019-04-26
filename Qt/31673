@@ -47,7 +47,10 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
         #update selected row
         self.pushButton_6.clicked.connect(self.updateTextodb)
     def convertC(self):
-    	self.db.csvConvert()
+    	
+    	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
+    	name="myFile"
+    	self.db.csvConvert(name,derectory)
     #updates selected row with new values
     def updateTextodb(self):
     	r=self.table.currentRow()
@@ -93,9 +96,11 @@ class ExampleApp(QtWidgets.QMainWindow, forml.Ui_Form):
     	derectory=QtWidgets.QFileDialog.getExistingDirectory(self, "676655")
     	
     	if derectory:
+    		pass
     		
-        	for filename in os.listdir(derectory):
-        		self.table.addItem(filename)
+    		
+        #	for filename in os.listdir(derectory):
+        		#self.table.addItem(filename)
         		#adding items to the db
         	#	self.db.insert(filename,"","","")
         		
